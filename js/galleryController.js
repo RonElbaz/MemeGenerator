@@ -12,7 +12,7 @@ function renderGallery() {
   var strHTML = ``
   for (var i = 0; i < imgs.length; i++) {
     var img = imgs[i]
-    strHTML += `<img class="gal-img" src="../${img.url}" onclick="onImageSelect(this.src)">`
+    strHTML += `<img class="gal-img" src="${img.url}" onclick="onImageSelect(this.src)">`
 
 }
   elMainContainer.innerHTML = strHTML
