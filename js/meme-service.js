@@ -32,6 +32,7 @@ var gMeme = {
       align: "left",
       color: "yellow",
       strokeColor: "black",
+      font: " Impact",
       x: 40,
       y: 40,
     },
@@ -41,6 +42,7 @@ var gMeme = {
       align: "left",
       color: "yellow",
       strokeColor: "black",
+      font: " Impact",
       x: 40,
       y: 80,
     },
@@ -50,6 +52,7 @@ var gMeme = {
       align: "left",
       color: "yellow",
       strokeColor: "black",
+      font: " Impact",
       x: 40,
       y: 120,
     },
@@ -104,7 +107,7 @@ function drawText(line) {
   gCtx.lineWidth = 2
   gCtx.strokeStyle = line.strokeColor
   gCtx.fillStyle = line.color
-  var font = line.size + "px" + " Arial"
+  var font = line.size + "px" + line.font
   gCtx.font = font
   gCtx.textAlign = line.align
   // console.log(gCtx)
@@ -163,7 +166,20 @@ function alignCenter() {
   if (gMeme.lines.length === 0) return
   gMeme.lines[gMeme.selectedLineIdx].align = "center"
   var x = gCanvas.width / 2
-  console.log(x)
-  gMeme.lines[gMeme.selectedLineIdx].x =x
+  // console.log(x)
+  gMeme.lines[gMeme.selectedLineIdx].x = x
+}
 
+function setFont(newFont) {
+  gMeme.lines[gMeme.selectedLineIdx].font = newFont
+}
+
+function setStrokeColor(newStrokeColor) {
+  gMeme.lines[gMeme.selectedLineIdx].strokeColor = newStrokeColor
+}
+
+function downloadCanvas(elLink) {
+  const data = gCanvas.toDataURL()
+  elLink.href = data
+  elLink.download = "my-meme.jpg"
 }

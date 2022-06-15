@@ -35,6 +35,19 @@ a {
   width: 200px;
   margin-inline-start: 1.3rem;
 }
+.user-msg{
+  font-family: Poppins;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.share-container{
+  font-family: Poppins;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-shadow: 2px 2px 8px #FF0000;
+}
 
 .layout {
   max-width: 58rem;
@@ -80,6 +93,14 @@ a {
 
 .input-div{
     margin-top: 1.5rem;
+    
+}
+
+.text-input{
+  box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+  border-radius: 28px;
+  width: 27rem;
+  height: 4rem;
 }
 .main-container {
   /* margin-inline-start: 5.5rem; */

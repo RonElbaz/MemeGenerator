@@ -18,17 +18,17 @@ function renderCanvas() {
                     <button onclick="onAlignCenter()">Align center</button>
                     <button onclick="onAlignRight()">Align right</button>
                     <select class="font-selector" onchange="onSetFont(value)">
-                      <option value="impact">impact</option>
-                      <option value="ariel">ariel</option>
+                      <option value=" Impact">impact</option>
+                      <option value=" Ariel">ariel</option>
                     </select>
                     <input class="Stroke-selector" type="color" value="#000000" onchange="onSetStrokeColor(this.value)">
-                    <input class="color-selector" type="color" value="#000000" onchange="onSetColor(this.value)">
+                    <input class="color-selector" type="color" value="#ffff00" onchange="onSetColor(this.value)">
                   </div>
                   <div class="sticker-selector">
                   </div>
                   <div class="share-div">
-                    <button>Share</button>
-                    <button>Download</button>
+                    <button onclick="onShare()">Share</button>
+                    <a href="#" onclick="onDownloadCanvas(this)" download="" style="text-decoration: none;">Download</a>
                   </div>
                 </div>`
 
@@ -99,4 +99,22 @@ function onAlignRight(){
 function onAlignCenter(){
   alignCenter()
   renderMeme()
+}
+
+function onSetFont(value){
+  setFont(value)
+  renderMeme()
+}
+
+function onSetStrokeColor(strokeColor){
+  setStrokeColor(strokeColor)
+  renderMeme()
+}
+
+function onDownloadCanvas(elLink){
+  downloadCanvas(elLink)
+}
+
+function onShare(){
+  uploadImg()
 }
