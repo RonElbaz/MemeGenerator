@@ -43,11 +43,11 @@ function setCanvasParameters() {
 }
 
 function renderMeme() {
-  var intro = "../"
+  // var intro = "../"
   var { url } = getCurrImgData()
-  var fullUrl = intro + url
+  // var fullUrl = intro + url
   //   console.log(fullUrl)
-  renderImg(fullUrl)
+  renderImg(url)
 }
 
 function onSetLine(line) {
