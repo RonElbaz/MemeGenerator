@@ -1,0 +1,69 @@
+@import 'helpers.css';
+
+:root{
+    --galleryClr : #383b42; 
+    --bodyClr : #22252c;
+    --specialClr : linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+}
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--bodyClr);
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+a{
+    text-decoration: none;
+    font-family: Poppins;
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.site-header{
+    border-radius: 2.3rem;
+    background-image: var(--specialClr);
+    margin-bottom: 1rem;
+}
+
+.main-logo{
+  width: 200px;
+  margin-inline-start: 1.3rem;
+}
+
+.layout{
+    max-width: 58rem;
+    margin: auto;
+ }
+
+ .buttons a{
+    height: 4.5rem;
+    width: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .gal{
+    display: grid;
+    gap:30px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 1250px;
+    background-color: var(--galleryClr);
+    margin: auto;
+ }
+
+ .gal-img{
+    width: 200px;
+    height: 175px;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0px -1px 10px 4px #000000;
+
+ }
+
