@@ -1,3 +1,5 @@
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+
 function renderCanvas() {
   var elMainContainer = document.querySelector(".main-container")
 
@@ -6,29 +8,37 @@ function renderCanvas() {
                   <div class="input-div">
                     <input class="text-input" type="text" placeholder="enter top line text here" oninput="onSetLine(this.value)">
                   </div>
-                  <div class="add-delete-div">
-                    <button onclick="onSwitchLine()">⬆⬇</button>
-                    <button>➕</button>
-                    <button onclick="onRemoveLine()">🗑️</button>
+                  <div class="add-delete-div flex align-center">
+                  <button class="up-line" onclick="onUpLine()">⬆</button>
+                  <button class="down-line" onclick="onDownLine()">⬇</button>
+                    <button class="switch-lines" onclick="onSwitchLine()">⬆⬇</button>
+                    <button class="add-line" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
+                    <button class="remove-line" onclick="onRemoveLine()"><i class="fa-solid fa-trash-can"></i></button>
                   </div>
                   <div class="font-div">
-                    <button onclick="onChangeFont(1)">A+</button>
-                    <button onclick="onChangeFont(-1)">A-</button>
-                    <button onclick="onAlignLeft()">Align left</button>
-                    <button onclick="onAlignCenter()">Align center</button>
-                    <button onclick="onAlignRight()">Align right</button>
+                    <button class="inc" onclick="onChangeFont(1)">A+</button>
+                    <button class="dec" onclick="onChangeFont(-1)">A-</button>
+                    <button class="lft" onclick="onAlignLeft()">Left</button>
+                    <button class="cnt" onclick="onAlignCenter()">Center</button>
+                    <button class="rgt" onclick="onAlignRight()">Right</button>
                     <select class="font-selector" onchange="onSetFont(value)">
                       <option value=" Impact">impact</option>
                       <option value=" Ariel">ariel</option>
                     </select>
-                    <input class="Stroke-selector" type="color" value="#000000" onchange="onSetStrokeColor(this.value)">
-                    <input class="color-selector" type="color" value="#ffff00" onchange="onSetColor(this.value)">
+                    <div class="color-div">
+                      <button><i class="fa-solid fa-palette"></i></button>
+                      <input class="color-selector" type="color" value="#ffff00" onchange="onSetColor(this.value)">
+                    </div>
+                    <div class="stroke-div">
+                      <button style="text-decoration:underline;">S</button>
+                      <input class="stroke-selector" type="color" value="#000000" onchange="onSetStrokeColor(this.value)">
+                    </div>
                   </div>
                   <div class="sticker-selector">
                   </div>
                   <div class="share-div">
-                    <button onclick="onShare()">Share</button>
-                    <a href="#" onclick="onDownloadCanvas(this)" download="" style="text-decoration: none;">Download</a>
+                    <button class="share-button" onclick="onShare()">Share</button>
+                    <button class="download-button"><a href="#" onclick="onDownloadCanvas(this)" download="" style="text-decoration: none;">Download</a></button>
                   </div>
                 </div>`
 
@@ -41,6 +51,8 @@ function setCanvasParameters() {
   var ctx = canvas.getContext("2d")
   setCtx(ctx)
 }
+
+
 
 function renderMeme() {
   // var intro = "../"
@@ -71,6 +83,7 @@ function onSwitchLine() {
   switchLine()
   changeInput()
   renderMeme()
+  // drawRectOnSelectedLine()
 
 }
 
@@ -118,3 +131,99 @@ function onDownloadCanvas(elLink){
 function onShare(){
   uploadImg()
 }
+
+function onAddLine(){
+  addLine()
+  renderMeme()
+}
+
+function onUpLine(){
+  upLine()
+  renderMeme()
+}
+function onDownLine(){
+  downLine()
+  renderMeme()
+}
+
+// //Handle the listeners
+// function addListeners() {
+//   addMouseListeners()
+//   addTouchListeners()
+//   //Listen for resize ev 
+//   window.addEventListener('resize', () => {
+//       resizeCanvas()
+//       renderCanvas()
+//   })
+// }
+
+// function addMouseListeners() {
+//   gCanvas.addEventListener('mousemove', onMove)
+//   gCanvas.addEventListener('mousedown', onDown)
+//   gCanvas.addEventListener('mouseup', onUp)
+// }
+
+// function addTouchListeners() {
+//   gCanvas.addEventListener('touchmove', onMove)
+//   gCanvas.addEventListener('touchstart', onDown)
+//   gCanvas.addEventListener('touchend', onUp)
+// }
+
+// function onDown(ev) {
+//   //Get the ev pos from mouse or touch
+//   const pos = getEvPos(ev)
+//   if (!isTextClicked(pos)) return
+//   setCircleDrag(true)
+//   //Save the pos we start from 
+//   gStartPos = pos
+//   document.body.style.cursor = 'grabbing'
+
+// }
+
+// function onMove(ev) {
+//   const currMeme = getCurrMemeLine()
+//   if (currMeme.isDrag) {
+//       const pos = getEvPos(ev)
+//       //Calc the delta , the diff we moved
+//       const dx = pos.x - gStartPos.x
+//       const dy = pos.y - gStartPos.y
+//       moveText(dx, dy)
+//       //Save the last pos , we remember where we`ve been and move accordingly
+//       gStartPos = pos
+//       //The canvas is render again after every move
+//       renderMeme()
+//   }
+// }
+
+// function onUp() {
+//   setTextDrag(false)
+//   document.body.style.cursor = 'grab'
+// }
+
+// function resizeCanvas() {
+//   const elContainer = document.querySelector('.canvas-container')
+//   gElCanvas.width = elContainer.offsetWidth
+//   gElCanvas.height = elContainer.offsetHeight
+// }
+
+// function getEvPos(ev) {
+
+//   //Gets the offset pos , the default pos
+//   var pos = {
+//       x: ev.offsetX,
+//       y: ev.offsetY
+//   }
+//   // Check if its a touch ev
+//   if (gTouchEvs.includes(ev.type)) {
+//       //soo we will not trigger the mouse ev
+//       ev.preventDefault()
+//       //Gets the first touch point
+//       ev = ev.changedTouches[0]
+//       //Calc the right pos according to the touch screen
+//       pos = {
+//           x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+//           y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+//       }
+//   }
+//   return pos
+// }

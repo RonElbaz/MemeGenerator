@@ -16,8 +16,11 @@ body {
 img {
   max-width: 100%;
   max-height: 100%;
+  cursor: pointer;
 }
-
+button{
+  cursor: pointer;
+}
 a {
   text-decoration: none;
   font-family: Poppins;
@@ -30,6 +33,32 @@ a {
   background-image: var(--specialClr);
   margin-bottom: 1rem;
 }
+
+.font-div{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "inc dec lft cnt rgt" 
+  "fnt-slct fnt-slct fnt-slct clr-div strk-div";
+  /* padding:20px; */
+  justify-items: center;
+  
+  /* align-content: center; */
+  
+  border-radius: 15px;
+  background-color: #19a59f;
+  width:28rem;
+  height: 9rem;
+}
+
+.inc{ grid-area: inc;}
+.dec{ grid-area: dec;}
+.lft{ grid-area: lft;}
+.cnt{ grid-area: cnt;}
+.rgt{ grid-area: rgt;} 
+.font-selector{grid-area: fnt-slct;}
+.color-div{grid-area: clr-div;}
+.stroke-div{grid-area: strk-div;} 
 
 .main-logo {
   width: 200px;
@@ -48,6 +77,16 @@ a {
   font-weight: 500;
   text-shadow: 2px 2px 8px #FF0000;
 }
+.font-selector{
+  box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+  border-radius: 10px;
+  border:transparent;
+  background-color: #ffffff;
+  width: 15rem;
+  height: 3rem;
+
+}
+
 
 .layout {
   max-width: 58rem;
@@ -98,9 +137,63 @@ a {
 
 .text-input{
   box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
-  border-radius: 28px;
+  border-radius: 1.75rem;
   width: 27rem;
   height: 4rem;
+  font-family: Poppins;
+  color: #3d3d3d;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.switch-lines{
+  box-shadow: 1px 5px 0 #048b97, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+ 
+  background-image: linear-gradient(-38deg, #66c4dc 0%, #40b1ce 50%, #0c98bb 100%);
+ 
+  background-color: #ebeef3;
+ 
+}
+
+.up-line{
+  box-shadow: 1px 5px 0 #bdf006, inset 0 5px 0 rgba(163, 165, 19, 0.58);
+ 
+  background-image: linear-gradient(-38deg, #b1d62a 0%, #abcc34 50%, #849c2b 100%);
+ 
+  background-color: #ebeef3;
+ 
+}
+
+.down-line{
+  box-shadow: 1px 5px 0 #e40ac7, inset 0 5px 0 rgba(161, 36, 130, 0.58);
+ 
+  background-image: linear-gradient(-38deg, #c53cb3 0%, #8a377f 50%, #e049cc 100%);
+ 
+  background-color: #ebeef3;
+ 
+}
+.remove-line{
+  box-shadow: 1px 5px 0 #8c0606, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+
+  background-color: #ebeef3;
+  background-image: linear-gradient(-38deg, #cf1d37 0%, #cf1d37 1%, #f05036 100%);
+  
+  /* border-color: white; */
+}
+
+.add-line{
+  
+  box-shadow: 1px 5px 0 #015d33, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+  background-image: linear-gradient(-38deg, #42eb5c 0%, #37b34a 100%);
+  background-color: #ebeef3;
+ 
+}
+.font-div button , .add-delete-div button{
+  width: 3.5rem;
+  height: 3.3rem;
+  border-radius: 10px;
+  border: transparent;
+  margin: auto;
 }
 .main-container {
   /* margin-inline-start: 5.5rem; */
@@ -112,7 +205,53 @@ a {
     margin-inline-start: 5.5rem;
 }
 
+.color-selector , .stroke-selector{
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  
+}
+select{
+  cursor: pointer;
+}
+.color-div , .stroke-div{
+  display: inline-block;
+  position: relative;
 
+
+}
+
+.share-button{
+  box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #19a59f;
+  background-color: #1e7cd3;
+  border-radius: 15px;
+  height: 3rem;
+  width:14.5rem;
+  border: transparent;
+  margin: auto;
+  color: white;
+  font-family: Poppins;
+  font-size: 21px;
+  font-weight: 500;  
+}
+
+.download-button{
+  height: 3rem;
+  width:14.5rem;
+  border: transparent;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 1px 6px 0 #632687, inset 0 5px 0 rgb(187, 19, 187);
+  background-color: #8f44bb;
+}
+
+.download-button a{
+  font-family: Poppins;
+  font-size: 21px;
+  font-weight: 500;  
+}
 
 @media (max-width: 1250px) {
   .gal {

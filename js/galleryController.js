@@ -31,5 +31,7 @@ function onImageSelect(imgSrc) {
 function renderAll() {
   renderCanvas()
   setCanvasParameters()
+  setDefaultMemeTextParameters()
   renderMeme()
+  // addListeners()
 }
