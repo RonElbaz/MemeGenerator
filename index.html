@@ -21,7 +21,15 @@
     </header>
 
     <sction class="main-container flex "> </sction>
-    <section class="gal"></section>
+    
+    <section class="gal">
+      <div><input placeholder="enter keyword" class="filter-input" list="opts" oninput="onSetFilter(this.value)">
+        <datalist id="opts" class="filter-datalist">
+
+        </datalist>
+      </input></div>
+      <div class="image-cnt"></div>
+    </section>
     <p class="user-msg"></p>
     <div class="share-container"></div>
     <script src="https://kit.fontawesome.com/d7a9b39512.js" crossorigin="anonymous"></script> 

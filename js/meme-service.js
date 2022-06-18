@@ -4,20 +4,20 @@ var gCtx
 var gKeywordSearchCountMap = { funny: 0, cat: 0, baby: 0 }
 var gImgs = [
   { id: 1, url: "img/1.jpg", keywords: ["funny", "cat"] },
-  { id: 2, url: "img/2.jpg", keywords: ["funny", "cat"] },
+  { id: 2, url: "img/2.jpg", keywords: ["funny", "dog"] },
   { id: 3, url: "img/3.jpg", keywords: ["funny", "cat"] },
   { id: 4, url: "img/4.jpg", keywords: ["funny", "cat"] },
   { id: 5, url: "img/5.jpg", keywords: ["funny", "cat"] },
   { id: 6, url: "img/6.jpg", keywords: ["funny", "cat"] },
   { id: 7, url: "img/7.jpg", keywords: ["funny", "cat"] },
   { id: 8, url: "img/8.jpg", keywords: ["funny", "cat"] },
-  { id: 9, url: "img/9.jpg", keywords: ["funny", "cat"] },
+  { id: 9, url: "img/9.jpg", keywords: ["funny", "horse"] },
   { id: 10, url: "img/10.jpg", keywords: ["funny", "cat"] },
   { id: 11, url: "img/11.jpg", keywords: ["funny", "cat"] },
   { id: 12, url: "img/12.jpg", keywords: ["funny", "cat"] },
-  { id: 13, url: "img/13.jpg", keywords: ["funny", "cat"] },
-  { id: 14, url: "img/14.jpg", keywords: ["funny", "cat"] },
-  { id: 15, url: "img/15.jpg", keywords: ["funny", "cat"] },
+  { id: 13, url: "img/13.jpg", keywords: ["sad", "cat"] },
+  { id: 14, url: "img/14.jpg", keywords: ["sad", "cat"] },
+  { id: 15, url: "img/15.jpg", keywords: ["pretty", "cat"] },
   { id: 16, url: "img/16.jpg", keywords: ["funny", "cat"] },
   { id: 17, url: "img/17.jpg", keywords: ["funny", "cat"] },
   { id: 18, url: "img/18.jpg", keywords: ["funny", "cat"] },
@@ -56,8 +56,18 @@ function setDefaultMemeTextParameters(){
 }
 
 function getImages() {
-  return gImgs
+  return gImgs.filter((img)=>{
+    return img.keywords.find(str=>{
+      if(str.includes(getFilter())){
+        // console.log("ok")
+        return true
+
+      }
+    })
+  });
 }
+
+
 
 function setImg(imgSrc) {
   var img = gImgs.find((img) => imgSrc === img.url)
@@ -246,6 +256,18 @@ function upLine(){
 function downLine(){
   if(gMeme.lines[gMeme.selectedLineIdx].y > gCanvas.height - 10) return 
   gMeme.lines[gMeme.selectedLineIdx].y += 5
+}
+
+function renderImgWithoutRect(image) {
+  var img = new Image()
+  img.onload = function () {
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+    renderMemeText()
+    // drawRectOnSelectedLine()
+  }
+
+  img.src = image //loads image from server and trigger img.onload
+  // console.log(img)
 }
 // function moveText(dx, dy) {
 //   gMeme.lines[gMeme.selectedLineIdx].x += dx

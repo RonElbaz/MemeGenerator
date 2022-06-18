@@ -3,7 +3,7 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 function renderCanvas() {
   var elMainContainer = document.querySelector(".main-container")
 
-  var strHTML = `<canvas class="meme-canvas" style="border: 5px solid black" onclick="" width="500" height="500"></canvas>
+  var strHTML = `<canvas class="meme-canvas" style="border: 5px solid black" width="500" height="500"></canvas>
                  <div class="meme-edit">
                   <div class="input-div">
                     <input class="text-input" type="text" placeholder="enter top line text here" oninput="onSetLine(this.value)">
