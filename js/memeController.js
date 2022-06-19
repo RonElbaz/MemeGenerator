@@ -209,7 +209,8 @@ function onMove(ev) {
 function onUp() {
   _sortLines()
   var id = setAllTextDragFalse()
-  if (!id) return
+  console.log("id",id)
+  if (id === undefined) return
   setLineManually(id)
   // setTextDrag(false)
   document.body.style.cursor = 'grab'
