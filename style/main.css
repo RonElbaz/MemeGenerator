@@ -334,4 +334,15 @@ select{
     /* margin:auto; */
   }
 
+  .text-input{
+    width: 300px;
+  }
+  .font-div{
+    width: 350px;
+  }
+
+  .font-selector{
+  max-width: 150px;
+  }
+
 }
