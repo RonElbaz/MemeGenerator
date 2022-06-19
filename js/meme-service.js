@@ -286,20 +286,20 @@ function isTextClicked(clickedPos) {
   var id
   gMeme.lines.forEach(function (line, idx) {
     var textWidth = Math.ceil(gCtx.measureText(line.txt).width)
-    // console.log("IDX: ", idx)
-    // console.log("line x:", line.x)
-    // console.log("pos x:", clickedPos.x)
-    // console.log("text width:", textWidth)
-    // console.log("line y:", line.y)
-    // console.log("pos y:", clickedPos.y)
-    // console.log("height:", line.y + line.size)
+    console.log("IDX: ", idx)
+    console.log("line x:", line.x)
+    console.log("pos x:", clickedPos.x)
+    console.log("text width:", textWidth)
+    console.log("line y:", line.y)
+    console.log("pos y:", clickedPos.y)
+    console.log("height:", line.y + line.size)
     if (
-      clickedPos.x >= line.x &&
-      clickedPos.x <= textWidth + line.x &&
-      clickedPos.y >= line.y &&
+      clickedPos.x >= line.x -20 &&
+      clickedPos.x <= textWidth + line.x +20 &&
+      clickedPos.y +40 >= line.y &&
       clickedPos.y <= line.y + line.size
     ) {
-      // console.log("sfsfsdfs")
+      console.log("sfsfsdfs")
       id = idx
     }
   })

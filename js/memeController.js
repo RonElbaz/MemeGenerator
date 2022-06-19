@@ -177,7 +177,7 @@ function onDown(ev) {
   //Get the ev pos from mouse or touch
   const pos = getEvPos(ev)
   var lineIdx = isTextClicked(pos) 
-  // console.log("line ix", lineIdx)
+  console.log("line ix", lineIdx)
   if (lineIdx === undefined) return
   setLineManually(lineIdx)
   // console.log("im here")
