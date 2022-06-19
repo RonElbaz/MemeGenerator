@@ -11,6 +11,7 @@
 
 body {
   background-color: var(--bodyClr);
+  /* max-width: 100vw; */
 }
 
 img {
@@ -84,6 +85,11 @@ a {
   background-color: #ffffff;
   width: 15rem;
   height: 3rem;
+
+}
+
+.vid-cnt{
+  text-align: center;
 
 }
 
@@ -257,6 +263,10 @@ select{
   font-weight: 500;  
 }
 
+.header-button:hover{
+  background-color: white;
+  color: #000000;
+}
 .download-button{
   height: 3rem;
   width:14.5rem;
@@ -274,17 +284,23 @@ select{
 }
 
 @media (max-width: 1250px) {
-  .gal {
+  .image-cnt {
     grid-template-columns: 1fr 1fr 1fr;
     width: 760px;
   }
+
 }
 
 @media (max-width: 800px) {
-  .gal {
+  .image-cnt {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     width: 500px;
+  }
+  .filter-input{
+    width: 30rem;
+    margin-inline-start: 1rem;
+    /* margin:auto; */
   }
   .main-container{
     flex-direction: column;
@@ -303,4 +319,19 @@ select{
   .font-div{
     margin: auto;
   }
+}
+
+@media (max-width: 550px) {
+  .image-cnt {
+    grid-template-columns: 1fr;
+    /* gap: 15px; */
+    width: 300px;
+  }
+
+  .filter-input{
+    width: 15rem;
+    margin-inline-start: 2.5rem;
+    /* margin:auto; */
+  }
+
 }

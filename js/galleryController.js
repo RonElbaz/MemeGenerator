@@ -12,7 +12,7 @@ function renderOptions(){
   opts.forEach(function(opt){
     strHTML += `<option value="${opt}">`
   })
-  console.log(strHTML)
+  console.log(strHTML )
   elDataList.innerHTML = strHTML
 }
 
@@ -48,6 +48,7 @@ function renderAll() {
   renderCanvas()
   setCanvasParameters()
   setDefaultMemeTextParameters()
+  addListeners()
   renderMeme()
   // addListeners()
 }

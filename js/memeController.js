@@ -70,7 +70,8 @@ function onSetLine(line) {
 }
 
 function onSetColor(value) {
-  setColor(value)
+  // setColor(value)
+  setProperty("color", value)
   renderMeme()
 }
 
@@ -89,12 +90,14 @@ function onSwitchLine() {
 
 function onRemoveLine(){
   removeLine()
+  switchLine()
   changeInput()
   renderMeme()
 }
 
 function changeInput(){
   var elInput = document.querySelector(".text-input")
+  // console.log(currentLineText())
   elInput.value = currentLineText()
 }
 
@@ -115,12 +118,14 @@ function onAlignCenter(){
 }
 
 function onSetFont(value){
-  setFont(value)
+  // setFont(value)
+  setProperty("font", value)
   renderMeme()
 }
 
 function onSetStrokeColor(strokeColor){
-  setStrokeColor(strokeColor)
+  // setStrokeColor(strokeColor)
+  setProperty("strokeColor", strokeColor)
   renderMeme()
 }
 
@@ -134,6 +139,8 @@ function onShare(){
 
 function onAddLine(){
   addLine()
+  switchLine()
+  changeInput()
   renderMeme()
 }
 
@@ -146,84 +153,94 @@ function onDownLine(){
   renderMeme()
 }
 
-// //Handle the listeners
-// function addListeners() {
-//   addMouseListeners()
-//   addTouchListeners()
-//   //Listen for resize ev 
-//   window.addEventListener('resize', () => {
-//       resizeCanvas()
-//       renderCanvas()
-//   })
-// }
+//Handle the listeners
+function addListeners() {
+  addMouseListeners()
+  addTouchListeners()
+}
 
-// function addMouseListeners() {
-//   gCanvas.addEventListener('mousemove', onMove)
-//   gCanvas.addEventListener('mousedown', onDown)
-//   gCanvas.addEventListener('mouseup', onUp)
-// }
+function addMouseListeners() {
+  var canvas = getCanvas()
+  canvas.addEventListener('mousemove', onMove)
+  canvas.addEventListener('mousedown', onDown)
+  canvas.addEventListener('mouseup', onUp)
+}
 
-// function addTouchListeners() {
-//   gCanvas.addEventListener('touchmove', onMove)
-//   gCanvas.addEventListener('touchstart', onDown)
-//   gCanvas.addEventListener('touchend', onUp)
-// }
+function addTouchListeners() {
+  var canvas = getCanvas()
+  canvas.addEventListener('touchmove', onMove)
+  canvas.addEventListener('touchstart', onDown)
+  canvas.addEventListener('touchend', onUp)
+}
 
-// function onDown(ev) {
-//   //Get the ev pos from mouse or touch
-//   const pos = getEvPos(ev)
-//   if (!isTextClicked(pos)) return
-//   setCircleDrag(true)
-//   //Save the pos we start from 
-//   gStartPos = pos
-//   document.body.style.cursor = 'grabbing'
+function onDown(ev) {
+  //Get the ev pos from mouse or touch
+  const pos = getEvPos(ev)
+  var lineIdx = isTextClicked(pos) 
+  // console.log("line ix", lineIdx)
+  if (lineIdx === undefined) return
+  setLineManually(lineIdx)
+  // console.log("im here")
+  renderMeme()
+  changeInput()
+  setTextDrag(true)
+  
+  //Save the pos we start from 
+  setStartPos(pos)
+  document.body.style.cursor = 'grabbing'
 
-// }
+}
 
-// function onMove(ev) {
-//   const currMeme = getCurrMemeLine()
-//   if (currMeme.isDrag) {
-//       const pos = getEvPos(ev)
-//       //Calc the delta , the diff we moved
-//       const dx = pos.x - gStartPos.x
-//       const dy = pos.y - gStartPos.y
-//       moveText(dx, dy)
-//       //Save the last pos , we remember where we`ve been and move accordingly
-//       gStartPos = pos
-//       //The canvas is render again after every move
-//       renderMeme()
-//   }
-// }
+function onMove(ev) {
+  const currMeme = getCurrMemeLine()
+  if (currMeme.isDrag) {
+      const pos = getEvPos(ev)
+      //Calc the delta , the diff we moved
+      const dx = pos.x - gStartPos.x
+      const dy = pos.y - gStartPos.y
+      moveText(dx, dy)
+      //Save the last pos , we remember where we`ve been and move accordingly
+      setStartPos(pos)
+      //The canvas is render again after every move
+      renderMeme()
+  }
+}
 
-// function onUp() {
-//   setTextDrag(false)
-//   document.body.style.cursor = 'grab'
-// }
+function onUp() {
+  _sortLines()
+  var id = setAllTextDragFalse()
+  if (!id) return
+  setLineManually(id)
+  // setTextDrag(false)
+  document.body.style.cursor = 'grab'
+}
 
 // function resizeCanvas() {
-//   const elContainer = document.querySelector('.canvas-container')
+//   const elContainer = document.querySelector('.main-container')
+//   var gElCanvas = document.querySelector(".meme-canvas")
 //   gElCanvas.width = elContainer.offsetWidth
 //   gElCanvas.height = elContainer.offsetHeight
+//   renderCanvas()
 // }
 
-// function getEvPos(ev) {
+function getEvPos(ev) {
 
-//   //Gets the offset pos , the default pos
-//   var pos = {
-//       x: ev.offsetX,
-//       y: ev.offsetY
-//   }
-//   // Check if its a touch ev
-//   if (gTouchEvs.includes(ev.type)) {
-//       //soo we will not trigger the mouse ev
-//       ev.preventDefault()
-//       //Gets the first touch point
-//       ev = ev.changedTouches[0]
-//       //Calc the right pos according to the touch screen
-//       pos = {
-//           x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-//           y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
-//       }
-//   }
-//   return pos
-// }
+  //Gets the offset pos , the default pos
+  var pos = {
+      x: ev.offsetX,
+      y: ev.offsetY
+  }
+  // Check if its a touch ev
+  if (gTouchEvs.includes(ev.type)) {
+      //soo we will not trigger the mouse ev
+      ev.preventDefault()
+      //Gets the first touch point
+      ev = ev.changedTouches[0]
+      //Calc the right pos according to the touch screen
+      pos = {
+          x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+          y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+      }
+  }
+  return pos
+}
